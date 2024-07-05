@@ -242,9 +242,6 @@ class _HeaderPageState extends State<HeaderPage> {
                 width: 40,
               ),
             )
-            
-
-
           ],
           ),
         );

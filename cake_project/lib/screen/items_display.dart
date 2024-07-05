@@ -1,5 +1,5 @@
 import 'package:cake_project/model/items_model.dart';
-
+import 'package:cake_project/screen/items_detail.dart';
 import 'package:flutter/material.dart';
 
 class ItemsDisplay extends StatefulWidget {
@@ -26,6 +26,7 @@ class _ItemsDisplayState extends State<ItemsDisplay> {
       itemBuilder: (context,index){
         CakeDetail cake = cakesItems[index];
         return GestureDetector(
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ItemsDetail(cake: cake))),
           child: Container(
             height: 265,
             decoration: BoxDecoration(

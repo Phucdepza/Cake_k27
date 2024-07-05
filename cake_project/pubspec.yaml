@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    
 
 dev_dependencies:
   flutter_test:
@@ -20,4 +21,6 @@ flutter:
   assets:
   - lib/asset/home2.png
   - lib/asset/icon_user.jpg
+  - lib/asset/apple.png
+  - lib/asset/google.png
   
