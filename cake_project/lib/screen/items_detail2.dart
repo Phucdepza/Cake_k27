@@ -1,5 +1,9 @@
+import 'package:cake_project/model/items_model.dart';
 import 'package:cake_project/model/items_model2.dart';
+import 'package:cake_project/provider/favorite_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cake_project/favorite/favorite.dart';
 class ItemsDetail2 extends StatefulWidget {
   const ItemsDetail2({super.key,required this.cake});
 final CakeDetail2 cake;
@@ -274,6 +278,7 @@ class _ItemsDetail2State extends State<ItemsDetail2> {
   }
 
   Padding detailItemsHeader() {
+    final provider = Provider.of<FavoriteProvider>(context);
     return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Row(
@@ -303,11 +308,16 @@ class _ItemsDetail2State extends State<ItemsDetail2> {
                     width: 40,
                     alignment: Alignment.center,
                     // ignore: prefer_const_constructors
-                    child: Icon(
-                      Icons.card_travel_rounded,
-                      color: Colors.white,
-
-                    ),
+                  child: IconButton(
+                  onPressed: () {
+                    provider.toggleFavorite(widget.cake as CakeDetail);
+                  },
+                  icon: Icon(              
+                    provider.isExist(widget.cake as CakeDetail)? Icons.favorite:       
+                    Icons.favorite_border,
+                    color: Colors.red,
+                  ),
+                ),
                     ),
                   ),
                )

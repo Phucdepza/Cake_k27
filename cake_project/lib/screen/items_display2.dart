@@ -1,6 +1,7 @@
+import 'package:cake_project/model/items_model.dart';
 import 'package:cake_project/model/items_model2.dart';
 import 'package:cake_project/pages/header_page.dart';
-
+import 'package:cake_project/provider/favorite_provider.dart';
 import 'package:cake_project/screen/items_detail2.dart';
 import 'package:flutter/material.dart';
 //import 'package:cake_project/pages/home_page.dart';
@@ -14,6 +15,7 @@ class ItemsDisplay2 extends StatefulWidget {
 class _ItemsDisplay2State extends State<ItemsDisplay2> {
   @override
   Widget build(BuildContext context) {
+    final provider = FavoriteProvider.of(context);
     return Scaffold(
        
       body: Column(
@@ -118,13 +120,20 @@ class _ItemsDisplay2State extends State<ItemsDisplay2> {
                             ),
                           ],
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 160, top: 10),
-                          child: Icon(
-                            Icons.favorite_border,
-                            color: Colors.black,
-                          ),
-                        ),
+                       Align(
+                  alignment: Alignment.topRight,
+                  child: GestureDetector(
+                    onTap: () {
+                      provider.toggleFavorite(cake2 as CakeDetail);
+                    },
+                    child: Icon(
+                      provider.isExist(cake2 as CakeDetail)
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
                         const Align(
                           alignment: Alignment.bottomRight,
                           child: Material(
@@ -179,7 +188,6 @@ class _ItemsDisplay2State extends State<ItemsDisplay2> {
             ),
             label: 'Tài khoản'),
         ],
-
         ),
     );
   }

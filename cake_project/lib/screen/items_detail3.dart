@@ -303,10 +303,9 @@ class _ItemsDetail3State extends State<ItemsDetail3> {
                     width: 40,
                     alignment: Alignment.center,
                     // ignore: prefer_const_constructors
-                    child: Icon(
-                      Icons.card_travel_rounded,
-                      color: Colors.white,
-
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.favorite),
                     ),
                     ),
                   ),
