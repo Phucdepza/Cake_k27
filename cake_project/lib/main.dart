@@ -2,6 +2,7 @@ import 'package:cake_project/pages/first_screen.dart';
 import 'package:cake_project/provider/favorite_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cake_project/pages/login_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -23,7 +24,7 @@ class MainApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.pink,
         ),
-        home: const FirstScreen(),
+        home: FirstScreen(),
       ),
     );
   }
