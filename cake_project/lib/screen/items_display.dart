@@ -14,7 +14,6 @@ class ItemsDisplay extends StatefulWidget {
 class _ItemsDisplayState extends State<ItemsDisplay> {
   @override
   Widget build(BuildContext context) {
-
     final provider = FavoriteProvider.of(context);
     return GridView.builder(
       shrinkWrap: true,
