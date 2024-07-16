@@ -1,4 +1,5 @@
 import 'package:cake_project/pages/home_page.dart';
+import 'package:cake_project/pages/login_page.dart';
 import 'package:cake_project/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -45,7 +46,7 @@ class FirstScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
+                    MaterialPageRoute(builder: (context) => LoginPage()),
                   );
                 },
                 child: const Text(
