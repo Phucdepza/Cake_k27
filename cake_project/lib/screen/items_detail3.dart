@@ -46,7 +46,7 @@ class _ItemsDetail3State extends State<ItemsDetail3> {
                       
                       ),
                       //For price
-                      Text('\$${widget.cake.price}',
+                      Text('\$${widget.cake.price}00',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
@@ -86,14 +86,16 @@ class _ItemsDetail3State extends State<ItemsDetail3> {
                                 IconButton(
                             onPressed: (){
                               
+                                 
                                 quantity += 1;
                                 setState(() {
                                   
                                 });
                               },
+                             
                             
                             icon: const Icon(
-                              Icons.remove,
+                              Icons.add,
                               color: Colors.white,
                               ),
                               ),
@@ -103,24 +105,24 @@ class _ItemsDetail3State extends State<ItemsDetail3> {
                   ],
                 ),
                  const SizedBox(height: 27,),
-                 const Row(children: [
+                 Row(children: [
                   //For rating
-                  Icon(
+                  const Icon(
                         Icons.star,
                         color:Colors.amber,
-                        size:18,
+                        size:20,
                         ),
                        
-                       SizedBox(
+                       const SizedBox(
                         width: 4,
                       ),
-                      //  Text(
-                      //   Widget.cake.rate.toString(),
-                      //   style: TextStyle(
-                      //     color: Colors.black
-                      //     ),
-                      // ),
-                      // ),
+                       Text(
+                        widget.cake.rate.toString(),
+                        style: const TextStyle(
+                          color: Colors.black
+                          ),
+                      ),
+                      
                       
                       // const Icon(Icons.fiber_manual_record,color: Colors.red,),
                       // const SizedBox(
@@ -130,8 +132,24 @@ class _ItemsDetail3State extends State<ItemsDetail3> {
                       //),
                        Spacer(),
                       //For time
-                      Icon(Icons.access_time_filled,color: Colors.amber,),
-                      SizedBox(width: 4,)
+                      const Icon(
+                        Icons.access_time_filled,
+                        color: Colors.amber,
+                        size: 20,
+                        ),
+                      const SizedBox(
+                        width: 4,
+                        ),
+                        Text(
+                        widget.cake.cookingTime,
+                    maxLines: 1,
+                    
+                    style:const TextStyle(
+                      //fontWeight: FontWeight.bold,
+                      
+                      fontSize: 20) ,
+                      
+                      ),
                 ],),
                 // Text(
                 //         widget.cake.name,
@@ -173,7 +191,7 @@ class _ItemsDetail3State extends State<ItemsDetail3> {
                             // Hành động cho nút "Add to cart"
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 21),
+                            padding: const EdgeInsets.symmetric(vertical: 15),
                             child: const Text(
                               "Thêm vào giỏ",
                               textAlign: TextAlign.center,
@@ -198,7 +216,7 @@ class _ItemsDetail3State extends State<ItemsDetail3> {
                             // Hành động cho nút "Buy now"
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 21),
+                            padding: const EdgeInsets.symmetric(vertical: 15),
                             child: const Text(
                               "Mua ngay",
                               textAlign: TextAlign.center,
@@ -250,21 +268,21 @@ class _ItemsDetail3State extends State<ItemsDetail3> {
                       decoration: BoxDecoration(
                         boxShadow: const [
                            BoxShadow(
-                            color: Colors.white,
+                            color: Colors.pink,
                             blurRadius: 15,
                             offset: Offset(0, 8)
                             
                             ),
            
                         ],
-                        borderRadius: BorderRadius.circular(280),
+                        borderRadius: BorderRadius.circular(40),
                         ),
                         child: ClipRRect(
-                           borderRadius: BorderRadius.circular(280),
+                           borderRadius: BorderRadius.circular(40),
                            child: Image.network(
                             widget.cake.image,
-                            height: 280,
-                            width: 280,
+                            height: 250,
+                            width: 250,
                             fit:BoxFit.cover ,),
                         ),
                         ) ,)
@@ -303,9 +321,10 @@ class _ItemsDetail3State extends State<ItemsDetail3> {
                     width: 40,
                     alignment: Alignment.center,
                     // ignore: prefer_const_constructors
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.favorite),
+                    child: Icon(
+                      Icons.card_travel_rounded,
+                      color: Colors.white,
+
                     ),
                     ),
                   ),

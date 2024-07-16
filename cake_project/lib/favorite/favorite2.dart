@@ -1,19 +1,19 @@
-import 'package:cake_project/provider/favourite_provider.dart';
+import 'package:cake_project/provider/favourite_provider2.dart';
 import 'package:cake_project/theme/colors.dart';
 import 'package:flutter/material.dart';
 //import 'package:provider/provider.dart';
 
-class Favorite extends StatefulWidget {
-  const Favorite({super.key});
+class Favorite2 extends StatefulWidget {
+  const Favorite2({super.key});
 
   @override
-  State<Favorite> createState() => _FavoriteState();
+  State<Favorite2> createState() => _FavoriteState();
 }
 
-class _FavoriteState extends State<Favorite> {
+class _FavoriteState extends State<Favorite2> {
   @override
   Widget build(BuildContext context) {
-    final provider = FavoriteProvider.of(context);
+    final provider = FavoriteProvider2.of(context);
 
     final finaList = provider.favorites;
     return Scaffold(

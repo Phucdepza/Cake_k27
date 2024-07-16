@@ -9,18 +9,29 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  provider: 
+  provider: ^6.1.2
+
+cupertino_icons: ^1.0.2
+shared_preferences: ^2.0.15
+path_provider: ^2.0.11
+sqflite: ^2.0.3
+badges: ^2.0.3
+provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true
   assets:
   - lib/asset/home2.png
   - lib/asset/icon_user.jpg
-  - lib/asset/apple.png
+  - lib/asset/socola.png
+  - lib/asset/Her.png
+  - lib/asset/vanila.jpg
   - lib/asset/google.png
+  - lib/asset/apple.png
+  - lib/asset/thankyou.jpg
   

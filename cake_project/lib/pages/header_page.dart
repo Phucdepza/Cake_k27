@@ -1,3 +1,5 @@
+//import 'package:cake_project/pages/navbar.dart';
+
 import 'package:cake_project/screen/items_display.dart';
 import 'package:cake_project/screen/items_display2.dart';
 import 'package:cake_project/screen/items_display3.dart';
@@ -13,13 +15,15 @@ int indexCategory = 0;
 class _HeaderPageState extends State<HeaderPage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    //return Drawer();
+   return Column(
+    
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         
         //For menu
         
-          topHeader(),
+          //topHeader(),
           const SizedBox(
             height: 30,
           ),
@@ -73,11 +77,11 @@ class _HeaderPageState extends State<HeaderPage> {
                   });
                   if(index == 1){
                     Navigator.push(context, 
-                    MaterialPageRoute(builder: (context) => const ItemsDisplay3()));           
+                    MaterialPageRoute(builder: (context) => const ItemsDisplay2()));           
                   }
                   else if(index == 2){
                     Navigator.push(context, 
-                    MaterialPageRoute(builder: (context) => const ItemsDisplay2()));
+                    MaterialPageRoute(builder: (context) => const ItemsDisplay3()));
                   }                 
                   else if(index == 0){
                     Navigator.pop(context, 
@@ -211,14 +215,15 @@ class _HeaderPageState extends State<HeaderPage> {
             children: [
               Material(
               color: Colors.black12,
-              borderRadius: BorderRadius.circular(10),       
+              borderRadius: BorderRadius.circular(10),
               child: InkWell(
+                onTap: (){},
                  borderRadius: BorderRadius.circular(10),
                 child: Container(
                   height: 40,
                   width: 40,
                   alignment: Alignment.center,
-                  child:const Icon(Icons.menu_open_rounded,color:Colors.black),           
+                   child:const Icon(Icons.menu_open_rounded,color:Colors.black),
                 ),
               ),
             ),
@@ -242,6 +247,9 @@ class _HeaderPageState extends State<HeaderPage> {
                 width: 40,
               ),
             )
+            
+
+
           ],
           ),
         );
@@ -249,4 +257,4 @@ class _HeaderPageState extends State<HeaderPage> {
 
     
   }
-}
+ }

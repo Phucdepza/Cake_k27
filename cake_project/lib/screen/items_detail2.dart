@@ -1,9 +1,7 @@
-import 'package:cake_project/model/items_model.dart';
 import 'package:cake_project/model/items_model2.dart';
-import 'package:cake_project/provider/favorite_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:cake_project/favorite/favorite.dart';
+import 'package:flutter/widgets.dart';
 class ItemsDetail2 extends StatefulWidget {
   const ItemsDetail2({super.key,required this.cake});
 final CakeDetail2 cake;
@@ -50,7 +48,7 @@ class _ItemsDetail2State extends State<ItemsDetail2> {
                       
                       ),
                       //For price
-                      Text('\$${widget.cake.price}',
+                      Text('\$${widget.cake.price}00',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
@@ -97,7 +95,7 @@ class _ItemsDetail2State extends State<ItemsDetail2> {
                               },
                             
                             icon: const Icon(
-                              Icons.remove,
+                              Icons.add,
                               color: Colors.white,
                               ),
                               ),
@@ -107,46 +105,51 @@ class _ItemsDetail2State extends State<ItemsDetail2> {
                   ],
                 ),
                  const SizedBox(height: 27,),
-                 const Row(children: [
+                 Row(children: [
                   //For rating
-                  Icon(
-                        Icons.star,
-                        color:Colors.amber,
-                        size:18,
-                        ),
+                   Icon(Icons.star,
+                      color: Colors.amber,
+                      size: 20,
+                      ),
+                       const SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                     widget.cake.rate.toString(),
+                    style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                     //fontWeight: FontWeight.bold,
+                    ),
+                      
+                      ),
                        
                        SizedBox(
                         width: 4,
                       ),
-                      //  Text(
-                      //   Widget.cake.rate.toString(),
-                      //   style: TextStyle(
-                      //     color: Colors.black
-                      //     ),
-                      // ),
-                      // ),
                       
-                      // const Icon(Icons.fiber_manual_record,color: Colors.red,),
-                      // const SizedBox(
-                      //   width: 4,
-                      // ),
-                      // Text('${widget.cake} kcal',style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
-                      //),
                        Spacer(),
                       //For time
-                      Icon(Icons.access_time_filled,color: Colors.amber,),
-                      SizedBox(width: 4,)
-                ],),
-                // Text(
-                //         widget.cake.name,
-                //     maxLines: 1,
+                      const Icon(
+                        Icons.access_time_filled,
+                        color: Colors.amber,
+                        size: 20,
+                        ),
+                      const SizedBox(
+                        width: 4,
+                        ),
+                        Text(
+                        widget.cake.cookingTime,
+                    maxLines: 1,
                     
-                //     style:const TextStyle(
-                //       fontWeight: FontWeight.bold,
-                //       color: Colors.black,
-                //       fontSize: 16) ,
+                    style:const TextStyle(
+                      //fontWeight: FontWeight.bold,
                       
-                //       ),
+                      fontSize: 20) ,
+                      
+                      ),
+                ],),
+                
                 //For description
                 const SizedBox(
                       height: 4,
@@ -177,7 +180,7 @@ class _ItemsDetail2State extends State<ItemsDetail2> {
                             // Hành động cho nút "Add to cart"
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 21),
+                            padding: const EdgeInsets.symmetric(vertical: 15),
                             child: const Text(
                               "Thêm vào giỏ",
                               textAlign: TextAlign.center,
@@ -202,7 +205,7 @@ class _ItemsDetail2State extends State<ItemsDetail2> {
                             // Hành động cho nút "Buy now"
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 21),
+                            padding: const EdgeInsets.symmetric(vertical: 15),
                             child: const Text(
                               "Mua ngay",
                               textAlign: TextAlign.center,
@@ -261,14 +264,14 @@ class _ItemsDetail2State extends State<ItemsDetail2> {
                             ),
            
                         ],
-                        borderRadius: BorderRadius.circular(280),
+                        borderRadius: BorderRadius.circular(40),
                         ),
                         child: ClipRRect(
-                           borderRadius: BorderRadius.circular(280),
+                           borderRadius: BorderRadius.circular(40),
                            child: Image.network(
                             widget.cake.image,
-                            height: 280,
-                            width: 280,
+                            height: 250,
+                            width: 250,
                             fit:BoxFit.cover ,),
                         ),
                         ) ,)
@@ -278,7 +281,6 @@ class _ItemsDetail2State extends State<ItemsDetail2> {
   }
 
   Padding detailItemsHeader() {
-    final provider = Provider.of<FavoriteProvider>(context);
     return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Row(
@@ -308,16 +310,11 @@ class _ItemsDetail2State extends State<ItemsDetail2> {
                     width: 40,
                     alignment: Alignment.center,
                     // ignore: prefer_const_constructors
-                  child: IconButton(
-                  onPressed: () {
-                    provider.toggleFavorite(widget.cake as CakeDetail);
-                  },
-                  icon: Icon(              
-                    provider.isExist(widget.cake as CakeDetail)? Icons.favorite:       
-                    Icons.favorite_border,
-                    color: Colors.red,
-                  ),
-                ),
+                    child: Icon(
+                      Icons.card_travel_rounded,
+                      color: Colors.white,
+
+                    ),
                     ),
                   ),
                )

@@ -1,10 +1,15 @@
-import 'package:cake_project/model/items_model.dart';
+import 'package:cake_project/favorite/favorite.dart';
+import 'package:cake_project/favorite/favorite2.dart';
 import 'package:cake_project/model/items_model2.dart';
 import 'package:cake_project/pages/header_page.dart';
-import 'package:cake_project/provider/favorite_provider.dart';
 import 'package:cake_project/screen/items_detail2.dart';
+import 'package:cake_project/screen/menu_cart.dart';
+import 'package:cake_project/screen/menu_contact.dart';
+import 'package:cake_project/screen/menu_new.dart';
+import 'package:cake_project/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
-//import 'package:cake_project/pages/home_page.dart';
+import 'package:cake_project/provider/favourite_provider2.dart';
+
 class ItemsDisplay2 extends StatefulWidget {
   const ItemsDisplay2({super.key});
 
@@ -13,185 +18,262 @@ class ItemsDisplay2 extends StatefulWidget {
 }
 
 class _ItemsDisplay2State extends State<ItemsDisplay2> {
-  @override
-  Widget build(BuildContext context) {
-    final provider = FavoriteProvider.of(context);
-    return Scaffold(
-       
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const HeaderPage(),
-          Expanded(
-            child: GridView.builder(
-              shrinkWrap: true,
-              itemCount: cakesItems2.length,
-              padding: const EdgeInsets.all(16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                mainAxisExtent: 265,
-              ),
-              itemBuilder: (context, index) {
-                CakeDetail2 cake2 = cakesItems2[index];
-                return GestureDetector(
-                  onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => ItemsDetail2(cake: cake2,))),
-                  child: Container(
-                    height: 265,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Stack(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Center(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  cake2.image,
-                                  height: 120,
-                                  width: 120,
-                                  fit: BoxFit.cover,
-                                ),
+  
+  int _selectedIndex = 0;
+  
+  final List<Widget> _widgetOptions = <Widget>[
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const HeaderPage(),
+        Expanded(
+          child: GridView.builder(
+            shrinkWrap: true,
+            itemCount: cakesItems2.length,
+            padding: const EdgeInsets.all(16),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              mainAxisExtent: 265,
+            ),
+            itemBuilder: (context, index) {
+              final provider2 = FavoriteProvider2.of(context);
+              CakeDetail2 cake2 = cakesItems2[index];
+              return GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemsDetail2(cake: cake2),
+                  ),
+                ),
+                child: Container(
+                  height: 265,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[100],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Stack(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.network(
+                                cake2.image,
+                                height: 120,
+                                width: 120,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-
-                            Padding(
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(cake2.name.toString(),
+                            child: Text(
+                              cake2.name.toString(),
                               maxLines: 1,
                               textAlign: TextAlign.center,
                               overflow: TextOverflow.ellipsis,
-                              style:const TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 19) ,
-                      
-                      ),
-                  ),
-                            const SizedBox(
-                              height: 4,
+                                fontSize: 19,
+                              ),
                             ),
-                            Padding(
-                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                   child: Row(
-                    children: [
-                      Text(
-                        cake2.cookingTime, style:const TextStyle(color: Colors.black),
-                        
-                
-                      ),
-                                  const Spacer(),
-                                  const Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                    size: 18,
-                                  ),
-                                  const SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(
-                                  cake2.rate.toString(),
-                                  style: TextStyle(
-                                  color: Colors.black
                           ),
-                      ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                '\$${cake2.price}',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 19,
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Row(
+                              children: [
+                                Text(
+                                  cake2.cookingTime,
+                                  style: const TextStyle(color: Colors.black),
                                 ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                  size: 18,
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  cake2.rate.toString(),
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              '\$${cake2.price}00',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 19,
                               ),
                             ),
-                          ],
-                        ),
-                       Align(
+                          ),
+                        ],
+                      ),
+                      
+                      Align(
                   alignment: Alignment.topRight,
                   child: GestureDetector(
                     onTap: () {
-                      provider.toggleFavorite(cake2 as CakeDetail);
+                      provider2.toggleFavorite(cake2);
                     },
                     child: Icon(
-                      provider.isExist(cake2 as CakeDetail)
+                      provider2.isExist(cake2)
                           ? Icons.favorite
                           : Icons.favorite_border,
                       color: Colors.red,
                     ),
                   ),
                 ),
-                        const Align(
-                          alignment: Alignment.bottomRight,
-                          child: Material(
-                            color: Colors.pink,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(18),
-                              bottomRight: Radius.circular(18),
-                            ),
-                            child: InkWell(
-                              child: Padding(
-                                padding: EdgeInsets.all(8),
-                                child: Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                ),
+                      const Align(
+                        alignment: Alignment.bottomRight,
+                        child: Material(
+                          color: Colors.pink,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(18),
+                            bottomRight: Radius.circular(18),
+                          ),
+                          child: InkWell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.white,
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    ),
+    const MenuCart(),
+    const Favorite2(),
+    const ProfileSrceen(),
+  ];
+
+  void _onItemTap(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.pink.shade100,
+      ),
+      drawer: Drawer(
+        child: Container(
+          color: Colors.white,
+          child: ListView(
+            children: [
+              DrawerHeader(
+                child: Center(
+                  child: Image.asset(
+                    'lib/asset/Her.png',
+                    width: 200,
+                    height: 200,
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.shopping_cart, color: Colors.black),
+                title: Text(
+                  'Giỏ hàng',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MenuCart()));
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.fiber_new, color: Colors.black),
+                title: Text(
+                  'Mẫu bánh mới',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MenuNew()));
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.contacts, color: Colors.black),
+                title: Text(
+                  'Liên hệ',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MenuContact()));
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.card_travel, color: Colors.black),
+                title: Text(
+                  'Giới thiệu về chúng tôi',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MenuContact()));
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: _widgetOptions[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: true,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTap,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Trang chủ',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Giỏ hàng'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Yêu thích',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Tài khoản',
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        selectedItemColor: Colors.black, 
-        unselectedItemColor: Colors.grey,
-        items: const[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            label: 'Trang chủ'),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shopping_cart,
-            ),
-            label: 'Giỏ hàng'),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite,
-            ),
-            label: 'Yêu thích'),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-            ),
-            label: 'Tài khoản'),
-        ],
-        ),
     );
   }
 }
-
-
-   

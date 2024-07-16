@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cake_project/model/items_model.dart';
+// ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 
 class FavoriteProvider extends ChangeNotifier {
