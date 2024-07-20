@@ -85,6 +85,11 @@ class _FavoriteState extends State<Favorite2> {
                         onTap: () {                        
                           finaList.removeAt(index);
                           setState(() {});
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('${favoriteItems.name} đã được xóa khỏi danh sách yêu thích'),
+                            ),
+                          );
                         },
                         child: const Icon(
                           Icons.delete,

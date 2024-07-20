@@ -1,4 +1,3 @@
-import 'package:cake_project/favorite/favorite.dart';
 import 'package:cake_project/model/items_model3.dart';
 import 'package:cake_project/pages/header_page.dart';
 import 'package:cake_project/provider/favourite_provider3.dart';
@@ -134,16 +133,25 @@ const SizedBox(
                       
                       Align(
                   alignment: Alignment.topRight,
-                  child: GestureDetector(
+                   child: GestureDetector(
                     onTap: () {
                       provider3.toggleFavorite(cake3);
+                      final snackBar = SnackBar(
+                        content: Text(
+                          provider3.isExist(cake3)
+                              ? '${cake3.name} đã thêm vào trang yêu thích'
+                              : '${cake3.name} đã xóa khỏi trang yêu thích',
+                        ),
+                        duration: const Duration(seconds: 2),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     child: Icon(
                       provider3.isExist(cake3)
                           ? Icons.favorite
                           : Icons.favorite_border,
                       color: Colors.red,
-),
+                    ),
                   ),
                 ),
                       const Align(

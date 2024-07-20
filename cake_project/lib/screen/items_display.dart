@@ -25,93 +25,85 @@ class _ItemsDisplayState extends State<ItemsDisplay> {
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
         mainAxisExtent: 300,
-        ), 
-
-      itemBuilder: (context,index){
+      ),
+      itemBuilder: (context, index) {
         CakeDetail cake = cakesItems[index];
         return GestureDetector(
-           onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => ItemsDetail(cake: cake,))),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ItemsDetail(cake: cake)),
+          ),
           child: Container(
             height: 265,
             decoration: BoxDecoration(
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(20),
-            
             ),
             child: Stack(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 15,),
+                    const SizedBox(height: 15),
                     Center(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
-                                        child: Image.network(
-                                        cake.image,
-                                        height: 120,
-                                        width: 120, 
-                                        fit: BoxFit.cover,
-                                        ),
-                                    ),
+                        child: Image.network(
+                          cake.image,
+                          height: 120,
+                          width: 120,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Text(cake.name,
-                maxLines: 1,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 19,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(children: [
-                  Text(
-                    cake.cookingTime,
-                    style: const TextStyle(
-                      color: Colors.black),
-                      
+                    const SizedBox(height: 15),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Text(
+                        cake.name,
+                        maxLines: 1,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19,
+                        ),
                       ),
-                      const Spacer(),
-                      const Icon(Icons.star,
-                      color: Colors.amber,
-                      size: 18,
+                    ),
+                    const SizedBox(height: 15),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Row(
+                        children: [
+                          Text(
+                            cake.cookingTime,
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          const Spacer(),
+                          const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                            size: 18,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            cake.rate.toString(),
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        width: 4,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        '\$${cake.price}00',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19,
+                          color: Colors.black,
+                        ),
                       ),
-                      Text(
-                    cake.rate.toString(),
-                    style: const TextStyle(
-                    color: Colors.black),
-                      
-                      ),
-                ],
-                ),
-              ),
-               Padding(
-                 padding: const EdgeInsets.all(16.0),
-                 child: Text(
-                  '\$${cake.price}00',
-                  style:  const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 19,
-                    color: Colors.black,
-                  ),
-                  ),
-               ),
-
-              
+                    ),
                   ],
                 ),
                 Align(
@@ -119,6 +111,15 @@ class _ItemsDisplayState extends State<ItemsDisplay> {
                   child: GestureDetector(
                     onTap: () {
                       provider.toggleFavorite(cake);
+                      final snackBar = SnackBar(
+                        content: Text(
+                          provider.isExist(cake)
+                              ? '${cake.name} đã thêm vào trang yêu thích'
+                              : '${cake.name} đã xóa khỏi trang yêu thích',
+                        ),
+                        duration: const Duration(seconds: 2),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     child: Icon(
                       provider.isExist(cake)
@@ -139,29 +140,19 @@ class _ItemsDisplayState extends State<ItemsDisplay> {
                     child: InkWell(
                       child: Padding(
                         padding: EdgeInsets.all(8),
-                        child: Icon(Icons.add,
-                        color: Colors.white,
-                         ),
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white,
                         ),
+                      ),
                     ),
-                    ),
-                )
-                
-                 
-              
-            ],
+                  ),
+                ),
+              ],
             ),
-            
-            ),
+          ),
         );
-        
-
       },
     );
-      
-    
-    
   }
 }
-
-

@@ -1,4 +1,3 @@
-import 'package:cake_project/favorite/favorite.dart';
 import 'package:cake_project/favorite/favorite2.dart';
 import 'package:cake_project/model/items_model2.dart';
 import 'package:cake_project/pages/header_page.dart';
@@ -135,6 +134,15 @@ class _ItemsDisplay2State extends State<ItemsDisplay2> {
                   child: GestureDetector(
                     onTap: () {
                       provider2.toggleFavorite(cake2);
+                      final snackBar = SnackBar(
+                        content: Text(
+                          provider2.isExist(cake2)
+                              ? '${cake2.name} đã thêm vào trang yêu thích'
+                              : '${cake2.name} đã xóa khỏi trang yêu thích',
+                        ),
+                        duration: const Duration(seconds: 2),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     child: Icon(
                       provider2.isExist(cake2)
