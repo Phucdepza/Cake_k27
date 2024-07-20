@@ -22,20 +22,20 @@ class _MenuCartState extends State<MenuCart> {
       setState(() {
         if (icon == Icons.add) {
           provider.incrementQtn(index);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Added to cart successfully!'),
-              duration: Duration(seconds: 1),
-            ),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     content: Text('Added to cart successfully!'),
+          //     duration: Duration(seconds: 1),
+          //   ),
+          // );
         } else {
           provider.decrementQtn(index);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Removed from cart successfully!'),
-              duration: Duration(seconds: 1),
-            ),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     content: Text('Removed from cart successfully!'),
+          //     duration: Duration(seconds: 1),
+          //   ),
+          // );
         }
       });
     }
@@ -135,7 +135,7 @@ class _MenuCartState extends State<MenuCart> {
                                 });
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                    content: Text('Removed from cart successfully!'),
+                                    content: Text('Xóa khỏi giỏ hàng thành công'),
                                     duration: Duration(seconds: 1),
                                   ),
                                 );
