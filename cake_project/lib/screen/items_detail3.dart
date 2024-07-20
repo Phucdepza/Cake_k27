@@ -7,6 +7,7 @@ class ItemsDetail3 extends StatefulWidget {
   State<ItemsDetail3> createState() => _ItemsDetail3State();
 }
 int quantity = 1;
+
 class _ItemsDetail3State extends State<ItemsDetail3> {
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,8 @@
 import 'package:cake_project/model/items_model.dart';
+import 'package:cake_project/provider/cart_provider.dart';
 import 'package:cake_project/screen/menu_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ItemsDetail extends StatefulWidget {
   const ItemsDetail({super.key,required this.cake});
@@ -13,7 +15,7 @@ int quantity = 1;
 class _ItemsDetailState extends State<ItemsDetail> {
   @override
   Widget build(BuildContext context) {
-    
+    final provider = CartProvider.of(context);
     return Scaffold(
      
       body: ListView(
@@ -179,6 +181,7 @@ class _ItemsDetailState extends State<ItemsDetail> {
                         child: InkWell(
                           borderRadius: BorderRadius.circular(15),
                           onTap: () {
+                            provider.toggleFavorite(widget.cake);
                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => MenuCart()));
                             // Hành động cho nút "Add to cart"
                           },

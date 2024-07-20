@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
         Favorite(),
       ],
     ),
-    const MenuCart(),
+    MenuCart(),
     const Favorite(),
     const Center(child: Text('Tài khoản')),
   ];
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const MenuCart()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => MenuCart()));
                 },
               ),
               ListTile(

@@ -1,4 +1,5 @@
 import 'package:cake_project/pages/first_screen.dart';
+import 'package:cake_project/provider/cart_provider.dart';
 import 'package:cake_project/provider/favourite_provider.dart';
 import 'package:cake_project/provider/favourite_provider2.dart';
 import 'package:cake_project/provider/favourite_provider3.dart';
@@ -18,6 +19,7 @@ class MainApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         // Add your providers here. For example:
+        ChangeNotifierProvider(create: (_)=>CartProvider(),),
         ChangeNotifierProvider(create: (_)=>FavoriteProvider(),),
         ChangeNotifierProvider(create: (_)=>FavoriteProvider2(),),
         ChangeNotifierProvider(create: (_)=>FavoriteProvider3(),),

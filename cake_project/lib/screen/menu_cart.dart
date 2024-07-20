@@ -1,6 +1,9 @@
-
-import 'package:cake_project/screen/cart_navbar.dart';
+import 'package:cake_project/screen/check_out.dart';
+import 'package:cake_project/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cake_project/provider/cart_provider.dart';
+import 'package:cake_project/model/items_model.dart';
 
 class MenuCart extends StatefulWidget {
   const MenuCart({super.key});
@@ -12,342 +15,189 @@ class MenuCart extends StatefulWidget {
 class _MenuCartState extends State<MenuCart> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<CartProvider>(context);
+    final finalist = provider.cart;
+
+    void productQuantity(IconData icon, int index) {
+      setState(() {
+        if (icon == Icons.add) {
+          provider.incrementQtn(index);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Added to cart successfully!'),
+              duration: Duration(seconds: 1),
+            ),
+          );
+        } else {
+          provider.decrementQtn(index);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Removed from cart successfully!'),
+              duration: Duration(seconds: 1),
+            ),
+          );
+        }
+      });
+    }
+
     return Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Colors.pink.shade100,
-          
-        //   elevation: 0,
-        //   title:  const Text(
-        //     style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
-        //     'Giỏ hàng',
-            
-        //     ),
-          
-        //   centerTitle: true,
-        //   leading: Material(color: Colors.transparent,
-        //   child: InkWell(borderRadius: BorderRadius.circular(10),
-        //   onTap: (){
-        //     Navigator.of(context).pop();
-        //   },
-        //   child: const Icon(Icons.arrow_back,
-        //   color: Colors.white,
-        //   ),
-          
-        //   ),
-        //   ),
-        // ),
-      body: ListView(children: [
-        SingleChildScrollView(
-          child: Padding(padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(children: [
-            //su dung ham phia duoi appbarwidget()
-            const Padding(
-              padding: EdgeInsets.only(
-              top: 20,
-              left: 10,
-              bottom: 10,
-          
-          ),
-              
-              ),
-              //Item
-          
-          
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 9),
-                child: Container(width: 380,height: 100,
-                decoration: BoxDecoration(color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.grey,
-                    spreadRadius: 3,
-                    blurRadius: 10,
-                    offset: Offset(0,3)
-                  ),
-                ],
-                ),
-                
-                child: Row(children: [
-                  Container(
-                    alignment: Alignment.center,
-                    child: Image.asset(
-                      'lib/asset/socola.png',
-                      height: 90,
-                    width: 90,
-                    
-                    fit: BoxFit.cover,
-                    
-                    ),
-                    
-                  
-                  ),
-                 const SizedBox(width: 20,),
-                  Container(
-                    width: 190,
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                     
-                     children: [
-                      Text(
-                        "Bánh Kem Socola",
-                        style: TextStyle(
-                          fontSize: 20,
-                          
-                          fontWeight: FontWeight.bold,
-                          
-                          ),
-                        ),
-                        Text(
-                        "Chocola Cake",
-                        style: TextStyle(
-                          fontSize: 20,
-                          //fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                          Text(
-                        "\435.000vnđ",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                     ],
+      bottomSheet: const CheckOutBox(),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
                     ),
                   ),
-                  const SizedBox(width: 30,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6),
-                    child: Container(padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(color: Colors.pink,
-                    borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                      Icon(
-              
-                        Icons.add,
-                    color: Colors.white,
-                    ),
-                    Text("1",style: TextStyle(
-                      fontSize: 18,
-                       
+                  const Text(
+                    "Giỏ hàng ",
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                      ),
-                    Icon(Icons.remove,
-                    color: Colors.white,
+                      fontSize: 25,
                     ),
+                  ),
+                  const SizedBox(),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: finalist.length,
+                itemBuilder: (context, index) {
+                  final cartItems = finalist[index];
+                  return Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                          ),
+                          padding: const EdgeInsets.all(20.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 100,
+                                width: 90,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: primaryColors,
+                                ),
+                                padding: const EdgeInsets.all(20.0),
+                                child: Image.network(cartItems.image),
+                              ),
+                              const SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    cartItems.name,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    "\$${cartItems.price}",
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 35,
+                        right: 35,
+                        child: Column(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  finalist.removeAt(index);
+                                });
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Removed from cart successfully!'),
+                                    duration: Duration(seconds: 1),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                                size: 20,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Container(
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: primaryColors,
+                                border: Border.all(
+                                  color: Colors.grey.shade400,
+                                  width: 2,
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 10),
+                                  GestureDetector(
+                                    onTap: () => productQuantity(Icons.remove, index),
+                                    child: const Icon(
+                                      Icons.remove,
+                                      size: 20,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    cartItems.quantity.toString(),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  GestureDetector(
+                                    onTap: () => productQuantity(Icons.add, index),
+                                    child: const Icon(
+                                      Icons.add,
+                                      size: 20,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
                                 ],
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-              //Item
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 9),
-                child: Container(width: 380,height: 100,
-                decoration: BoxDecoration(color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.grey,
-                    spreadRadius: 3,
-                    blurRadius: 10,
-                    offset: Offset(0,3)
-                  )
-                ]
-                ),
-                child: Row(children: [
-                  Container(
-                    alignment: Alignment.center,
-                    child: Image.asset(
-                      'lib/asset/vanila.jpg',
-                      height: 90,
-                    width: 90,
-                    fit: BoxFit.cover,
-                    ),
-                   
-                  ),
-                 const SizedBox(width: 20,),
-                  Container(
-                    width: 190,
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                     
-                     children: [
-                      Text(
-                        "Bánh Kem Vanila",
-                        style: TextStyle(
-                          fontSize: 20,
-                          
-                          fontWeight: FontWeight.bold,
-                          
-                          ),
-                        ),
-                        Text(
-                        "Vanila Cake",
-                        style: TextStyle(
-                          fontSize: 20,
-                          //fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                          Text(
-                        "\$435.000",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                     ],
-                    ),
-                  ),
-                  const SizedBox(width: 30,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6),
-                    child: Container(padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(color: Colors.pink,
-                    borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                      Icon(
-              
-                        Icons.add,
-                    color: Colors.white,
-                    ),
-                    Text("1",style: TextStyle(
-                      fontSize: 18,
-                       
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                      ),
-                    Icon(Icons.remove,
-                    color: Colors.white,
-                    ),
-           
                     ],
-                     ),
-                    ),
-                    ),
-                ],),
-                ),
-              
+                  );
+                },
               ),
-              
-                  // 
-                ],),
-                ),
-              
-              ),
-              
-                    
-                //      Padding(
-                // padding: const EdgeInsets.symmetric(
-                //   horizontal: 20,
-                //   vertical: 30),
-                //   child: Container(padding: const EdgeInsets.all(20),
-                //   decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10),
-                //   boxShadow: [
-                //     BoxShadow(
-                //       color: Colors.grey.withOpacity(0.5),
-                //       spreadRadius: 3,
-                //       blurRadius: 10,
-                //       offset: const Offset(0,3),
-
-                //     ),
-                //   ],
-                //   ),
-                //   child: const Column(children: [
-                //     Padding(
-                //       padding: EdgeInsets.symmetric(vertical: 10),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         Text(
-                //           "Sản phẩm:",
-                //           style: TextStyle(fontSize: 20),
-                //           ),
-                //           Text(
-                //           "1",
-                //           style: TextStyle(fontSize: 20),
-                //           ),
-                //                       ],
-                //                     ),
-                //                   ),
-
-                //                   Divider(
-                //                     color: Colors.black,
-                //                     ),
-
-                //                     Padding(
-                //       padding: EdgeInsets.symmetric(vertical: 10),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         Text(
-                //           "Giá tiền:",
-                //           style: TextStyle(fontSize: 20),
-                //           ),
-                //           Text(
-                //           "\435.000 vnd",
-                //           style: TextStyle(fontSize: 20),
-                //           ),
-                //                       ],
-                //                     ),
-                //                   ),
-                                 
-                //                   Padding(
-                //       padding: EdgeInsets.symmetric(vertical: 10),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         Text(
-                //           "Vận chuyển:",
-                //           style: TextStyle(fontSize: 20),
-                //           ),
-                //           Text(
-                //           "0 vnd",
-                //           style: TextStyle(fontSize: 20),
-                //          ),
-                //                       ],
-                //                     ),
-                //                   ),
-                //                   Divider(
-                //                     color: Colors.black,
-                //                     ),
-                //                    Padding(
-                //       padding: EdgeInsets.symmetric(vertical: 10),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         Text(
-                //           "Tổng hóa đơn:",
-                //           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-                //           ),
-                //           Text(
-                //           "\870.000 vnd",
-                //           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.red),
-                //           ),
-                //                       ],
-                //                     ),
-                //                   ),
-                //                 ],
-                //               ),
-                //             ),
-                //           ),
-                        ],
-                      ),
-                      bottomNavigationBar: CartNavbar(),
-                    );
-             
-        
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

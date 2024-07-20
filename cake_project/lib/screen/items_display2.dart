@@ -180,7 +180,7 @@ class _ItemsDisplay2State extends State<ItemsDisplay2> {
         ),
       ],
     ),
-    const MenuCart(),
+    // const MenuCart(),
     const Favorite2(),
     const ProfileSrceen(),
   ];
@@ -219,7 +219,7 @@ class _ItemsDisplay2State extends State<ItemsDisplay2> {
                   style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MenuCart()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => MenuCart()));
                 },
               ),
               ListTile(
