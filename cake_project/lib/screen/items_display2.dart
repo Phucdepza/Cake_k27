@@ -180,9 +180,9 @@ class _ItemsDisplay2State extends State<ItemsDisplay2> {
         ),
       ],
     ),
-    // const MenuCart(),
+    const MenuCart(),
     const Favorite2(),
-    const ProfileSrceen(),
+    const ProfileScreen(),
   ];
 
   void _onItemTap(int index) {

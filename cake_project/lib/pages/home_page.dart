@@ -4,6 +4,7 @@ import 'package:cake_project/screen/items_display.dart';
 import 'package:cake_project/screen/menu_cart.dart';
 import 'package:cake_project/screen/menu_contact.dart';
 import 'package:cake_project/screen/menu_new.dart';
+import 'package:cake_project/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,9 +25,9 @@ class _HomePageState extends State<HomePage> {
         Favorite(),
       ],
     ),
-    MenuCart(),
+    const MenuCart(),
     const Favorite(),
-    const Center(child: Text('Tài khoản')),
+    const ProfileScreen(),
   ];
 
   void _onItemTap(int index) {

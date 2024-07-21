@@ -11,14 +11,14 @@ class CheckOutBox extends StatelessWidget {
     return Container(
       height: 300,
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(30),
           bottomLeft: Radius.circular(30),
         )
       ),
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           TextField(
@@ -27,21 +27,21 @@ class CheckOutBox extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide.none
               ),
-              contentPadding: EdgeInsets.symmetric(
+              contentPadding: const EdgeInsets.symmetric(
                 vertical: 5,
                 horizontal: 15,
               ),
               filled: false,
               fillColor:  primaryColors,
               hintText: "Nhập mã giảm giá ",
-              hintStyle: TextStyle(
+              hintStyle: const TextStyle(
                 color: Colors.grey,
                 fontWeight: FontWeight.w600,
                 fontSize: 14
               ),
               suffixIcon: TextButton(
                 onPressed: (){},
-                child: Text(
+                child: const Text(
                   "Chấp nhận", 
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -52,13 +52,13 @@ class CheckOutBox extends StatelessWidget {
               )
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 "Tổng dự tính",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ class CheckOutBox extends StatelessWidget {
               ),
               Text(
                 "\$${provider.totalPrice()}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
                   fontSize: 16,
@@ -76,17 +76,17 @@ class CheckOutBox extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,          
           ),
-          Divider(),
-          SizedBox(
+          const Divider(),
+          const SizedBox(
             height: 10,          
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 "Tổng cộng ",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -95,24 +95,24 @@ class CheckOutBox extends StatelessWidget {
               ),
               Text(
                 "\$${provider.totalPrice()}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,          
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.pink,
-              minimumSize: Size(double.infinity, 55),
+              minimumSize: const Size(double.infinity, 55),
             ),
             onPressed: (){},
-            child: Text(
-              "Check Out",
+            child: const Text(
+              "Thanh toán",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,

@@ -3,7 +3,7 @@ import 'package:cake_project/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cake_project/provider/cart_provider.dart';
-import 'package:cake_project/model/items_model.dart';
+
 
 class MenuCart extends StatefulWidget {
   const MenuCart({super.key});

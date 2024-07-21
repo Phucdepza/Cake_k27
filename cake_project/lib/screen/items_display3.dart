@@ -5,9 +5,8 @@ import 'package:cake_project/screen/items_detail3.dart';
 import 'package:cake_project/screen/menu_cart.dart';
 import 'package:cake_project/screen/menu_contact.dart';
 import 'package:cake_project/screen/menu_new.dart';
-import 'package:cake_project/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cake_project/screen/profile_screen.dart';
 import '../favorite/favorite3.dart';
 
 
@@ -182,9 +181,9 @@ const SizedBox(
         ),
       ],
     ),
-    // const MenuCart(),
+    const MenuCart(),
     const Favorite3(),
-    const ProfileSrceen(),
+    const ProfileScreen(),
   ];
 
   void _onItemTap(int index) {
@@ -221,7 +220,7 @@ const SizedBox(
                   style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
                 onTap: () {
-                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MenuCart()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MenuCart()));
                 },
               ),
               ListTile(
